@@ -1,10 +1,11 @@
-const fs = require('fs');
+const http = require('http');
 
-const requestHandler = (req, res) => {
+const server = http.createServer((req, res)=> {
+    console.log(req.url, req.method, req.headers);
+    
     const url = req.url;
     const method = req.method;
-    console.log(req.url, req.method, req.headers);
-
+    const fs = require('fs');
 
     if(url === '/')
     {
@@ -45,11 +46,12 @@ const requestHandler = (req, res) => {
     res.write('<html>');
     res.write('<head><title>My First Page    </title></head>');
     res.write('<body><h1>Hello from my Node.js Server!</h1></body>');
+
     res.write('</html>');
     res.end();
-}
 
-module.exports = requestHandler;
 
-    
-    
+
+});
+
+server.listen(3000);
